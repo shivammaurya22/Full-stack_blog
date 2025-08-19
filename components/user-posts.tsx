@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { BlogCard } from "@/components/blog-card"
 import { EditPostModal } from "@/components/edit-post-modal"
-import { DeleteConfirmModal } from "@/components/delete-confirm-modal"
+import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { Loader2, RefreshCw, FileText } from "lucide-react"
@@ -22,8 +22,7 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
   const [loading, setLoading] = useState(true)
   const [editingPost, setEditingPost] = useState<(Post & { _id: string }) | null>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
-  const [postToDelete, setPostToDelete] = useState<string | null>(null)
+  const [deletingPostId, setDeletingPostId] = useState<string | null>(null)
 
   const fetchUserPosts = async () => {
     try {
@@ -53,16 +52,15 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
     fetchUserPosts()
   }, [username])
 
-  const handleDelete = async (postId: string) => {
-    setPostToDelete(postId)
-    setDeleteModalOpen(true)
+  const handleDelete = (postId: string) => {
+    setDeletingPostId(postId)
   }
 
   const confirmDelete = async () => {
-    if (!postToDelete) return
+    if (!deletingPostId) return
 
     try {
-      const response = await fetch(`/api/posts/${postToDelete}`, {
+      const response = await fetch(`/api/posts/${deletingPostId}`, {
         method: "DELETE",
       })
 
@@ -70,14 +68,14 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
         throw new Error("Failed to delete post")
       }
 
-      const updatedPosts = posts.filter((post) => post._id !== postToDelete)
+      const updatedPosts = posts.filter((post) => post._id !== deletingPostId)
       setPosts(updatedPosts)
       onPostCountChange?.(updatedPosts.length)
 
       toast({
         title: "Success",
         description: "Post deleted successfully.",
-        className: "bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-green-500/30",
+        className: "bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20",
       })
     } catch (error) {
       console.error("Error deleting post:", error)
@@ -87,8 +85,7 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
         variant: "destructive",
       })
     } finally {
-      setPostToDelete(null)
-      setDeleteModalOpen(false)
+      setDeletingPostId(null)
     }
   }
 
@@ -99,11 +96,6 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
 
   const handlePostUpdated = (updatedPost: Post & { _id: string }) => {
     setPosts((prevPosts) => prevPosts.map((post) => (post._id === updatedPost._id ? updatedPost : post)))
-    toast({
-      title: "Success",
-      description: "Post updated successfully.",
-      className: "bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-500/30",
-    })
   }
 
   const handleCloseEditModal = () => {
@@ -125,7 +117,7 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
           variant="outline"
           onClick={fetchUserPosts}
           disabled={loading}
-          className="flex items-center gap-2 bg-transparent hover:bg-primary/10 border-primary/20"
+          className="flex items-center gap-2 bg-transparent border-primary/20 hover:bg-primary/5"
         >
           <RefreshCw className={`h-4 w-4 text-primary ${loading ? "animate-spin" : ""}`} />
           Refresh
@@ -163,7 +155,7 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
               <p className="text-muted-foreground mb-4">Start sharing your stories with the community!</p>
               <Button
                 asChild
-                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg"
+                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white"
               >
                 <a href="/create-post">Create Your First Post</a>
               </Button>
@@ -177,15 +169,13 @@ export function UserPosts({ username, onPostCountChange }: UserPostsProps) {
         post={editingPost}
         isOpen={isEditModalOpen}
         onClose={handleCloseEditModal}
-        onPostUpdated={handlePostUpdated}
+        onUpdate={handlePostUpdated}
       />
 
-      <DeleteConfirmModal
-        open={deleteModalOpen}
-        onOpenChange={setDeleteModalOpen}
+      <DeleteConfirmationModal
+        isOpen={!!deletingPostId}
+        onClose={() => setDeletingPostId(null)}
         onConfirm={confirmDelete}
-        title="Delete Post"
-        description="Are you sure you want to delete this post? This action cannot be undone."
       />
     </div>
   )

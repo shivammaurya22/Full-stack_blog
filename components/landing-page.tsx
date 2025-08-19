@@ -25,7 +25,7 @@ export function LandingPage() {
               <Button
                 size="lg"
                 onClick={() => signIn("google")}
-                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg px-8 py-6 shadow-lg"
+                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white text-lg px-8 py-6"
               >
                 <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                   <path
@@ -118,7 +118,7 @@ export function LandingPage() {
             <Button
               size="lg"
               onClick={() => signIn("google")}
-              className="bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90 text-lg px-8 py-6 shadow-lg"
+              className="bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90 text-white text-lg px-8 py-6"
             >
               <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -156,7 +156,7 @@ export function LandingPage() {
                 GoDPost
               </span>
             </div>
-            <p className="text-sm text-muted-foreground">© 2024 GoDPost. Made with ❤️ for storytellers everywhere.</p>
+            <p className="text-sm text-muted-foreground">© 2025 GoDPost. Made with ❤️ for storytellers everywhere.</p>
           </div>
         </div>
       </footer>

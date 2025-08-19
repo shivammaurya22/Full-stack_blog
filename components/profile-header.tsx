@@ -21,6 +21,7 @@ interface ProfileHeaderProps {
 export function ProfileHeader({ user, postCount }: ProfileHeaderProps) {
   return (
     <div className="relative overflow-hidden">
+      {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-90" />
       <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
 
@@ -30,28 +31,26 @@ export function ProfileHeader({ user, postCount }: ProfileHeaderProps) {
           <CardContent className="p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               {/* Avatar */}
-              <Avatar className="h-24 w-24 border-4 border-primary/20 ring-4 ring-primary/10">
+              <Avatar className="h-24 w-24 border-4 border-primary/20">
                 <AvatarImage src={user.image || ""} alt={user.name} />
-                <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white text-2xl font-bold">
+                <AvatarFallback className="bg-primary text-primary-foreground text-2xl font-bold">
                   {user.name.charAt(0)}
                 </AvatarFallback>
               </Avatar>
 
               {/* User Info */}
               <div className="flex-1 text-center md:text-left">
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-2">
-                  {user.name}
-                </h1>
+                <h1 className="text-3xl font-bold text-foreground mb-2">{user.name}</h1>
                 <p className="text-lg text-muted-foreground mb-4">@{user.username}</p>
 
                 {/* Stats */}
                 <div className="flex flex-wrap justify-center md:justify-start gap-6 mb-6">
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <Hash className="h-4 w-4 text-primary" />
+                    <Hash className="h-4 w-4" />
                     <span className="text-sm">{postCount} posts</span>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <Calendar className="h-4 w-4 text-secondary" />
+                    <Calendar className="h-4 w-4" />
                     <span className="text-sm">
                       Joined {formatDistanceToNow(new Date(user.createdAt), { addSuffix: true })}
                     </span>
@@ -59,10 +58,7 @@ export function ProfileHeader({ user, postCount }: ProfileHeaderProps) {
                 </div>
 
                 {/* Action Button */}
-                <Button
-                  asChild
-                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg"
-                >
+                <Button asChild className="bg-primary hover:bg-primary/90">
                   <Link href="/create-post">
                     <PenTool className="mr-2 h-4 w-4" />
                     Create New Post

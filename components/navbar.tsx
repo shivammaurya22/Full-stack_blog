@@ -18,10 +18,10 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-secondary to-accent shadow-lg">
-              <Zap className="h-6 w-6 text-white" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary via-secondary to-accent">
+              <Zap className="h-5 w-5 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
               GoDPost
             </span>
           </Link>
@@ -32,7 +32,7 @@ export function Navbar() {
               <div className="h-8 w-20 animate-pulse rounded bg-muted" />
             ) : session ? (
               <>
-                <Button asChild variant="ghost" className="text-foreground hover:text-primary hover:bg-primary/10">
+                <Button asChild variant="ghost" className="text-foreground hover:text-primary">
                   <Link href="/create-post">
                     <PenTool className="mr-2 h-4 w-4 text-primary" />
                     Create Post
@@ -40,13 +40,10 @@ export function Navbar() {
                 </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="relative h-10 w-10 rounded-full ring-2 ring-primary/20 hover:ring-primary/40"
-                    >
-                      <Avatar className="h-10 w-10">
+                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                      <Avatar className="h-8 w-8">
                         <AvatarImage src={session.user.image || ""} alt={session.user.name || ""} />
-                        <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white font-semibold">
+                        <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white">
                           {session.user.name?.charAt(0) || "U"}
                         </AvatarFallback>
                       </Avatar>
@@ -69,7 +66,7 @@ export function Navbar() {
             ) : (
               <Button
                 onClick={() => signIn("google")}
-                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg"
+                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white"
               >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path
@@ -99,7 +96,11 @@ export function Navbar() {
           <div className="md:hidden flex items-center space-x-2">
             <ModeToggle />
             <Button variant="ghost" size="sm" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5 text-foreground" />
+              ) : (
+                <Menu className="h-5 w-5 text-foreground" />
+              )}
             </Button>
           </div>
         </div>
@@ -141,7 +142,7 @@ export function Navbar() {
                   signIn("google")
                   setMobileMenuOpen(false)
                 }}
-                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white"
               >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path
