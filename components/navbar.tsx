@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ModeToggle } from "@/components/mode-toggle"
-import { PenTool, User, LogOut, Menu, X } from "lucide-react"
+import { PenTool, User, LogOut, Menu, X, Zap } from "lucide-react"
 import Link from "next/link"
 
 export function Navbar() {
@@ -17,12 +17,13 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <PenTool className="h-5 w-5 text-primary-foreground" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-secondary to-accent shadow-lg">
+              <Zap className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-foreground">BlogSpace</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              GoDPost
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -31,18 +32,21 @@ export function Navbar() {
               <div className="h-8 w-20 animate-pulse rounded bg-muted" />
             ) : session ? (
               <>
-                <Button asChild variant="ghost" className="text-foreground hover:text-primary">
+                <Button asChild variant="ghost" className="text-foreground hover:text-primary hover:bg-primary/10">
                   <Link href="/create-post">
-                    <PenTool className="mr-2 h-4 w-4" />
+                    <PenTool className="mr-2 h-4 w-4 text-primary" />
                     Create Post
                   </Link>
                 </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                      <Avatar className="h-8 w-8">
+                    <Button
+                      variant="ghost"
+                      className="relative h-10 w-10 rounded-full ring-2 ring-primary/20 hover:ring-primary/40"
+                    >
+                      <Avatar className="h-10 w-10">
                         <AvatarImage src={session.user.image || ""} alt={session.user.name || ""} />
-                        <AvatarFallback className="bg-primary text-primary-foreground">
+                        <AvatarFallback className="bg-gradient-to-br from-primary to-secondary text-white font-semibold">
                           {session.user.name?.charAt(0) || "U"}
                         </AvatarFallback>
                       </Avatar>
@@ -51,19 +55,22 @@ export function Navbar() {
                   <DropdownMenuContent className="w-56" align="end" forceMount>
                     <DropdownMenuItem asChild>
                       <Link href="/profile" className="cursor-pointer">
-                        <User className="mr-2 h-4 w-4" />
+                        <User className="mr-2 h-4 w-4 text-primary" />
                         My Profile
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
-                      <LogOut className="mr-2 h-4 w-4" />
+                      <LogOut className="mr-2 h-4 w-4 text-destructive" />
                       Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
             ) : (
-              <Button onClick={() => signIn("google")} className="bg-primary hover:bg-primary/90">
+              <Button
+                onClick={() => signIn("google")}
+                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-lg"
+              >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -106,13 +113,13 @@ export function Navbar() {
               <div className="space-y-2">
                 <Button asChild variant="ghost" className="w-full justify-start">
                   <Link href="/create-post" onClick={() => setMobileMenuOpen(false)}>
-                    <PenTool className="mr-2 h-4 w-4" />
+                    <PenTool className="mr-2 h-4 w-4 text-primary" />
                     Create Post
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" className="w-full justify-start">
                   <Link href="/profile" onClick={() => setMobileMenuOpen(false)}>
-                    <User className="mr-2 h-4 w-4" />
+                    <User className="mr-2 h-4 w-4 text-primary" />
                     My Profile
                   </Link>
                 </Button>
@@ -124,7 +131,7 @@ export function Navbar() {
                     setMobileMenuOpen(false)
                   }}
                 >
-                  <LogOut className="mr-2 h-4 w-4" />
+                  <LogOut className="mr-2 h-4 w-4 text-destructive" />
                   Logout
                 </Button>
               </div>
@@ -134,7 +141,7 @@ export function Navbar() {
                   signIn("google")
                   setMobileMenuOpen(false)
                 }}
-                className="w-full bg-primary hover:bg-primary/90"
+                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
               >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path

@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "BlogSpace - Share Your Stories",
+  title: "GoDPost - Share Your Stories",
   description: "A modern blogging platform where you can share your thoughts and connect with others",
   generator: "v0.app",
 }

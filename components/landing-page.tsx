@@ -25,7 +25,7 @@ export function LandingPage() {
               <Button
                 size="lg"
                 onClick={() => signIn("google")}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6"
+                className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg px-8 py-6 shadow-lg"
               >
                 <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                   <path
@@ -57,7 +57,7 @@ export function LandingPage() {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl mb-4">Why Choose BlogSpace?</h2>
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl mb-4">Why Choose GoDPost?</h2>
             <p className="text-lg text-muted-foreground">
               Everything you need to share your stories and connect with a community of writers.
             </p>
@@ -65,7 +65,7 @@ export function LandingPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <Card className="border-border bg-card hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
                   <PenTool className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold text-card-foreground">Easy Writing</h3>
@@ -76,7 +76,7 @@ export function LandingPage() {
             </Card>
             <Card className="border-border bg-card hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-secondary/10">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-secondary/20 to-secondary/10">
                   <Users className="h-6 w-6 text-secondary" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold text-card-foreground">Community</h3>
@@ -87,7 +87,7 @@ export function LandingPage() {
             </Card>
             <Card className="border-border bg-card hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/10">
                   <Zap className="h-6 w-6 text-accent" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold text-card-foreground">Fast & Secure</h3>
@@ -96,7 +96,7 @@ export function LandingPage() {
             </Card>
             <Card className="border-border bg-card hover:shadow-lg transition-shadow">
               <CardContent className="p-6 text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-secondary/10">
                   <Heart className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold text-card-foreground">Discover</h3>
@@ -113,12 +113,12 @@ export function LandingPage() {
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Ready to Start Your Journey?</h2>
             <p className="mb-8 text-lg text-muted-foreground">
-              Join thousands of writers who are already sharing their stories on BlogSpace.
+              Join thousands of writers who are already sharing their stories on GoDPost.
             </p>
             <Button
               size="lg"
               onClick={() => signIn("google")}
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 text-lg px-8 py-6"
+              className="bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90 text-lg px-8 py-6 shadow-lg"
             >
               <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -149,12 +149,14 @@ export function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <PenTool className="h-5 w-5 text-primary-foreground" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary via-secondary to-accent">
+                <Zap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-foreground">BlogSpace</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                GoDPost
+              </span>
             </div>
-            <p className="text-sm text-muted-foreground">© 2024 BlogSpace. Made with ❤️ for storytellers everywhere.</p>
+            <p className="text-sm text-muted-foreground">© 2024 GoDPost. Made with ❤️ for storytellers everywhere.</p>
           </div>
         </div>
       </footer>
