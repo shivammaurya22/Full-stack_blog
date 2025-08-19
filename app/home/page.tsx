@@ -14,10 +14,10 @@ function HomePage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
         <Navbar />
         <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
         </div>
       </div>
     )
@@ -28,11 +28,11 @@ function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary/5 to-secondary/5 py-12">
+      <section className="bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 py-12 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div>
@@ -42,13 +42,20 @@ function HomePage() {
               </p>
             </div>
             <div className="flex gap-4">
-              <Button asChild className="bg-primary hover:bg-primary/90">
+              <Button
+                asChild
+                className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
+              >
                 <Link href="/create-post">
                   <PenTool className="mr-2 h-4 w-4" />
                   Create Post
                 </Link>
               </Button>
-              <Button asChild variant="outline">
+              <Button
+                asChild
+                variant="outline"
+                className="border-blue-200 hover:bg-blue-50 dark:border-blue-800 dark:hover:bg-blue-900/20 bg-transparent"
+              >
                 <Link href="/profile">
                   <TrendingUp className="mr-2 h-4 w-4" />
                   My Profile

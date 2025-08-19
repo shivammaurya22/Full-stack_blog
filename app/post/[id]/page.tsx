@@ -106,10 +106,10 @@ export default function PostPage() {
 
   if (status === "loading" || status === "unauthenticated") {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[50vh]">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
           </div>
         </div>
       </div>
@@ -118,10 +118,10 @@ export default function PostPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[50vh]">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
           </div>
         </div>
       </div>
@@ -130,11 +130,14 @@ export default function PostPage() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-foreground mb-4">Post not found</h1>
-            <Button onClick={() => router.push("/home")}>
+            <Button
+              onClick={() => router.push("/home")}
+              className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
+            >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Home
             </Button>
@@ -145,17 +148,18 @@ export default function PostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <Button variant="ghost" onClick={() => router.back()}>
-            <ArrowLeft className="mr-2 h-4 w-4 text-primary" />
+          <Button variant="ghost" onClick={() => router.back()} className="hover:bg-blue-100 dark:hover:bg-blue-900/20">
+            <ArrowLeft className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
             Back
           </Button>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <BlogCard
+            key={post._id}
             post={post}
             currentUserId={session?.user?.id}
             onEdit={handleEdit}

@@ -12,10 +12,10 @@ function CreatePostPage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
         <Navbar />
         <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
         </div>
       </div>
     )
@@ -26,15 +26,15 @@ function CreatePostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
       <Navbar />
 
       {/* Header Section */}
-      <section className="bg-gradient-to-r from-primary/5 to-secondary/5 py-12">
+      <section className="bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 py-12 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-              <PenTool className="h-6 w-6 text-primary" />
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
+              <PenTool className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">Share Your Story</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

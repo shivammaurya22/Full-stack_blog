@@ -60,7 +60,7 @@ export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullConten
   }
 
   return (
-    <Card className="hover:shadow-lg transition-shadow duration-200 border-border bg-card">
+    <Card className="hover:shadow-xl transition-all duration-300 border border-blue-200/50 dark:border-blue-800/50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-lg hover:shadow-blue-200/25 dark:hover:shadow-blue-900/25">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
