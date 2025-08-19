@@ -19,40 +19,39 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json({ error: "Invalid post ID" }, { status: 400 })
     }
 
-    // Check if user already liked the post
-    const existingLike = await db.collection("likes").findOne({
-      postId: new ObjectId(postId),
-      userId: userId,
-    })
+    const post = await db.collection("posts").findOne({ _id: new ObjectId(postId) })
 
-    let isLiked: boolean
-    let likesCount: number
-
-    if (existingLike) {
-      // Unlike the post
-      await db.collection("likes").deleteOne({
-        postId: new ObjectId(postId),
-        userId: userId,
-      })
-      isLiked = false
-    } else {
-      // Like the post
-      await db.collection("likes").insertOne({
-        postId: new ObjectId(postId),
-        userId: userId,
-        createdAt: new Date(),
-      })
-      isLiked = true
+    if (!post) {
+      return NextResponse.json({ error: "Post not found" }, { status: 404 })
     }
 
-    // Get updated likes count
-    likesCount = await db.collection("likes").countDocuments({
-      postId: new ObjectId(postId),
-    })
+    const currentLikes = post.likes || []
+    const isCurrentlyLiked = currentLikes.includes(userId)
+
+    let updatedLikes: string[]
+
+    if (isCurrentlyLiked) {
+      // Unlike the post - remove user ID from likes array
+      updatedLikes = currentLikes.filter((id: string) => id !== userId)
+    } else {
+      // Like the post - add user ID to likes array
+      updatedLikes = [...currentLikes, userId]
+    }
+
+    // Update the post with new likes array
+    await db.collection("posts").updateOne(
+      { _id: new ObjectId(postId) },
+      {
+        $set: {
+          likes: updatedLikes,
+          updatedAt: new Date(),
+        },
+      },
+    )
 
     return NextResponse.json({
-      likes: likesCount,
-      isLiked: isLiked,
+      likes: updatedLikes,
+      isLiked: !isCurrentlyLiked,
     })
   } catch (error) {
     console.error("Error handling like:", error)

@@ -12,7 +12,7 @@ import Link from "next/link"
 import type { Post } from "@/lib/models/Post"
 
 interface BlogCardProps {
-  post: Post & { _id: string; likes?: number; isLiked?: boolean }
+  post: Post & { _id: string }
   currentUserId?: string
   onEdit?: (post: Post & { _id: string }) => void
   onDelete?: (postId: string) => void
@@ -20,11 +20,13 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullContent = false }: BlogCardProps) {
-  const [likes, setLikes] = useState(post.likes || 0)
-  const [isLiked, setIsLiked] = useState(post.isLiked || false)
+  const [likes, setLikes] = useState(post.likes || [])
   const [isLiking, setIsLiking] = useState(false)
   const { toast } = useToast()
   const isOwner = currentUserId === post.authorId
+  const isLiked = currentUserId ? likes.includes(currentUserId) : false
+  const likesCount = likes.length
+
   const truncatedContent = showFullContent
     ? post.content
     : post.content.length > 200
@@ -44,7 +46,6 @@ export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullConten
       if (response.ok) {
         const data = await response.json()
         setLikes(data.likes)
-        setIsLiked(data.isLiked)
       }
     } catch (error) {
       console.error("Error liking post:", error)
@@ -99,7 +100,7 @@ export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullConten
               <Badge
                 key={index}
                 variant="secondary"
-                className="text-xs bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary"
+                className="text-xs bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400"
               >
                 #{tag}
               </Badge>
@@ -110,12 +111,12 @@ export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullConten
           <Button
             variant="ghost"
             size="sm"
-            className={`${isLiked ? "text-secondary" : "text-muted-foreground"} hover:text-secondary`}
+            className={`${isLiked ? "text-red-500" : "text-muted-foreground"} hover:text-red-500`}
             onClick={handleLike}
             disabled={!currentUserId || isLiking}
           >
             <Heart className={`h-4 w-4 mr-1 ${isLiked ? "fill-current" : ""}`} />
-            {likes > 0 ? likes : "Like"}
+            {likesCount > 0 ? likesCount : "Like"}
           </Button>
           {!showFullContent && (
             <Button asChild variant="ghost" size="sm" className="text-primary hover:text-primary/80">

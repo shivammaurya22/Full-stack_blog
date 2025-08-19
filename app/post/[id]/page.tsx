@@ -12,29 +12,28 @@ import { useToast } from "@/hooks/use-toast"
 import type { Post } from "@/lib/models/Post"
 
 export default function PostPage() {
-  // ✅ Always destructure both `data` and `status`
   const { data: session, status } = useSession()
   const params = useParams()
   const router = useRouter()
   const { toast } = useToast()
-
   const [post, setPost] = useState<(Post & { _id: string }) | null>(null)
   const [loading, setLoading] = useState(true)
   const [editingPost, setEditingPost] = useState<(Post & { _id: string }) | null>(null)
   const [deletingPostId, setDeletingPostId] = useState<string | null>(null)
 
-  // ✅ Authentication Guard
   useEffect(() => {
+    if (status === "loading") return // Still loading
     if (status === "unauthenticated") {
-      router.push("/") // redirect to landing page
+      router.push("/")
+      return
     }
   }, [status, router])
 
   useEffect(() => {
-    if (status === "authenticated" && params.id) {
+    if (params.id && status === "authenticated") {
       fetchPost(params.id as string)
     }
-  }, [status, params.id])
+  }, [params.id, status])
 
   const fetchPost = async (postId: string) => {
     try {
@@ -105,12 +104,25 @@ export default function PostPage() {
     setEditingPost(null)
   }
 
-  // ✅ Handle session loading
-  if (status === "loading" || loading) {
+  if (status === "loading" || status === "unauthenticated") {
     return (
       <div className="min-h-screen bg-background">
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-[50vh]">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-[50vh]">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          </div>
         </div>
       </div>
     )
@@ -132,7 +144,6 @@ export default function PostPage() {
     )
   }
 
-  // ✅ Authenticated + post loaded → render
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">

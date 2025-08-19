@@ -7,6 +7,7 @@ export interface Post {
   authorName: string
   authorUsername: string
   authorImage?: string
+  likes: string[] // Array of user IDs who liked the post
   createdAt: Date
   updatedAt: Date
 }
@@ -19,4 +20,5 @@ export interface CreatePostData {
   authorName: string
   authorUsername: string
   authorImage?: string
+  likes?: string[] // Optional for new posts
 }

@@ -3,7 +3,20 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { signIn } from "next-auth/react"
-import { PenTool, Users, Zap, Heart, ArrowRight } from "lucide-react"
+import {
+  PenTool,
+  Users,
+  Zap,
+  Heart,
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  Code,
+  Database,
+  Shield,
+  Palette,
+} from "lucide-react"
 
 export function LandingPage() {
   return (
@@ -101,6 +114,102 @@ export function LandingPage() {
                 </div>
                 <h3 className="mb-2 text-xl font-semibold text-card-foreground">Discover</h3>
                 <p className="text-muted-foreground">Find amazing content through tags and search by username.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center mb-16">
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl mb-4">Built with Modern Technology</h2>
+            <p className="text-lg text-muted-foreground">
+              GoDPost is crafted using cutting-edge technologies to deliver the best experience.
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-600/10">
+                  <Code className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Next.js 15</h3>
+                <p className="text-muted-foreground">
+                  React framework with App Router for optimal performance and SEO.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-green-500/20 to-green-600/10">
+                  <Database className="h-6 w-6 text-green-600" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">MongoDB</h3>
+                <p className="text-muted-foreground">NoSQL database for flexible and scalable data storage.</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500/20 to-purple-600/10">
+                  <Shield className="h-6 w-6 text-purple-600" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">NextAuth.js</h3>
+                <p className="text-muted-foreground">Secure authentication with Google OAuth integration.</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/10">
+                  <Palette className="h-6 w-6 text-cyan-600" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Tailwind CSS</h3>
+                <p className="text-muted-foreground">Utility-first CSS framework for beautiful, responsive design.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center mb-16">
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl mb-4">Get in Touch</h2>
+            <p className="text-lg text-muted-foreground">Have questions or feedback? We'd love to hear from you!</p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto">
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+                  <Mail className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Email Us</h3>
+                <p className="text-muted-foreground mb-4">Send us your questions or feedback</p>
+                <a href="mailto:hello@godpost.com" className="text-primary hover:text-primary/80 font-medium">
+                  hello@godpost.com
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-secondary/20 to-secondary/10">
+                  <Phone className="h-6 w-6 text-secondary" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Call Us</h3>
+                <p className="text-muted-foreground mb-4">Speak with our support team</p>
+                <a href="tel:+1234567890" className="text-secondary hover:text-secondary/80 font-medium">
+                  +1 (234) 567-8900
+                </a>
+              </CardContent>
+            </Card>
+            <Card className="border-border bg-card hover:shadow-lg transition-shadow">
+              <CardContent className="p-6 text-center">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/10">
+                  <MapPin className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">Visit Us</h3>
+                <p className="text-muted-foreground mb-4">Come say hello at our office</p>
+                <p className="text-accent font-medium">San Francisco, CA</p>
               </CardContent>
             </Card>
           </div>
