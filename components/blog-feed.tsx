@@ -118,6 +118,7 @@ export function BlogFeed({ currentUserId }: BlogFeedProps) {
                   currentUserId={currentUserId}
                   onEdit={handleEdit}
                   onDelete={handleDelete}
+                  onLike={(updatedPost) => handlePostUpdated(updatedPost)} // <-- new line
                 />
               ))}
             </div>
