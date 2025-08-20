@@ -73,7 +73,7 @@ function HomePage() {
           <p className="text-muted-foreground">Explore the latest posts from our community of writers.</p>
         </div>
 
-        <BlogFeed />
+        <BlogFeed currentUserId={session.user.id} />
       </main>
     </div>
   )
