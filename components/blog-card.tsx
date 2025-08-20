@@ -16,10 +16,18 @@ interface BlogCardProps {
   currentUserId?: string
   onEdit?: (post: Post & { _id: string }) => void
   onDelete?: (postId: string) => void
+  onLike?: (updatedPost: Post & { _id: string }) => void  // <-- added
   showFullContent?: boolean
 }
 
-export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullContent = false }: BlogCardProps) {
+export function BlogCard({
+  post,
+  currentUserId,
+  onEdit,
+  onDelete,
+  onLike,
+  showFullContent = false,
+}: BlogCardProps) {
   const [likes, setLikes] = useState(post.likes || [])
   const [isLiking, setIsLiking] = useState(false)
   const { toast } = useToast()
@@ -46,6 +54,7 @@ export function BlogCard({ post, currentUserId, onEdit, onDelete, showFullConten
       if (response.ok) {
         const data = await response.json()
         setLikes(data.likes)
+        onLike?.({ ...post, likes: data.likes })  // <-- notify parent
       }
     } catch (error) {
       console.error("Error liking post:", error)
