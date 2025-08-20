@@ -1,13 +1,13 @@
 "use client"
 
 import { useSession } from "next-auth/react"
-import { AuthProvider } from "@/components/providers/session-provider"
+import { useRouter } from "next/navigation"
 import { Navbar } from "@/components/navbar"
 import { LandingPage } from "@/components/landing-page"
-import { redirect } from "next/navigation"
 
-function HomePage() {
+export default function HomePage() {
   const { data: session, status } = useSession()
+  const router = useRouter()
 
   if (status === "loading") {
     return (
@@ -21,7 +21,8 @@ function HomePage() {
   }
 
   if (session) {
-    redirect("/home")
+    router.push("/home")
+    return null
   }
 
   return (
@@ -29,13 +30,5 @@ function HomePage() {
       <Navbar />
       <LandingPage />
     </div>
-  )
-}
-
-export default function Page() {
-  return (
-    <AuthProvider>
-      <HomePage />
-    </AuthProvider>
   )
 }
