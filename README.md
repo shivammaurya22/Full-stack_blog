@@ -14,7 +14,7 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/shivams-projects-a9a13f6e/v0-full-stack-blog](https://vercel.com/shivams-projects-a9a13f6e/v0-full-stack-blog)**
+**https://full-stack-blog-24.vercel.app/**
 
 ## Build your app
 
