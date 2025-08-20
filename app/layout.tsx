@@ -1,9 +1,10 @@
 import type React from "react"
-import type { Metadata } from "next/content"
+import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
+import { AuthProvider } from "@/components/providers/session-provider" // ✅
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -29,10 +30,12 @@ html {
         `}</style>
       </head>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <AuthProvider> {/* ✅ wraps whole app */}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )
