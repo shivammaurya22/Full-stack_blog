@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSession } from "next-auth/react"
 import { BlogCard } from "@/components/blog-card"
 import { EditPostModal } from "@/components/edit-post-modal"
 import { SearchBar } from "@/components/search-bar"
@@ -10,8 +9,11 @@ import { useToast } from "@/hooks/use-toast"
 import { Loader2, RefreshCw, Search } from "lucide-react"
 import type { Post } from "@/lib/models/Post"
 
-export function BlogFeed() {
-  const { data: session } = useSession()
+interface BlogFeedProps {
+  currentUserId?: string
+}
+
+export function BlogFeed({ currentUserId }: BlogFeedProps) {
   const { toast } = useToast()
   const [posts, setPosts] = useState<(Post & { _id: string })[]>([])
   const [loading, setLoading] = useState(true)
@@ -56,26 +58,14 @@ export function BlogFeed() {
     if (!confirm("Are you sure you want to delete this post?")) return
 
     try {
-      const response = await fetch(`/api/posts/${postId}`, {
-        method: "DELETE",
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to delete post")
-      }
+      const response = await fetch(`/api/posts/${postId}`, { method: "DELETE" })
+      if (!response.ok) throw new Error("Failed to delete post")
 
       setPosts(posts.filter((post) => post._id !== postId))
-      toast({
-        title: "Success",
-        description: "Post deleted successfully.",
-      })
+      toast({ title: "Success", description: "Post deleted successfully." })
     } catch (error) {
       console.error("Error deleting post:", error)
-      toast({
-        title: "Error",
-        description: "Failed to delete post. Please try again.",
-        variant: "destructive",
-      })
+      toast({ title: "Error", description: "Failed to delete post.", variant: "destructive" })
     }
   }
 
@@ -85,7 +75,7 @@ export function BlogFeed() {
   }
 
   const handlePostUpdated = (updatedPost: Post & { _id: string }) => {
-    setPosts((prevPosts) => prevPosts.map((post) => (post._id === updatedPost._id ? updatedPost : post)))
+    setPosts((prev) => prev.map((p) => (p._id === updatedPost._id ? updatedPost : p)))
   }
 
   const handleCloseEditModal = () => {
@@ -125,7 +115,7 @@ export function BlogFeed() {
                 <BlogCard
                   key={post._id}
                   post={post}
-                  currentUserId={session?.user?.id}
+                  currentUserId={currentUserId}
                   onEdit={handleEdit}
                   onDelete={handleDelete}
                 />
